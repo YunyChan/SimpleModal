@@ -67,6 +67,7 @@
 
     function fConstructor(oConf){
         this.config = oConf = oConf || {};
+        this.showClose = oConf.close === undefined ? true : oConf.close;
         this.title = oConf.title || '';
         this.content = oConf.content || '';
         this.operation = oConf.operation || '';
@@ -110,10 +111,10 @@
         this.modal = oDoc.createElement('div');
         this.modal.className = 'simple-modal';
         this.modal.innerHTML = [
-            '<a class="simple-modal-close">X</a>',
-            '<div class="simple-modal-title">' + this.title + '</div>',
-            '<div class="simple-modal-content">' + this.content + '</div>',
-            '<div class="simple-modal-operation">' + this.operation + '</div>'
+            this.showClose ? '<a class="simple-modal-close">X</a>' : '',
+            this.title ? '<div class="simple-modal-title">' + this.title + '</div>' : '',
+            this.content ? '<div class="simple-modal-content">' + this.content + '</div>' : '',
+            this.operation ? '<div class="simple-modal-operation">' + this.operation + '</div>': ''
         ].join('');
         oDoc.body.appendChild(this.modal);
     }
